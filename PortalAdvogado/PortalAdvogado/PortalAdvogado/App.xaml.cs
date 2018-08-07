@@ -24,14 +24,15 @@ namespace PortalAdvogado
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("Login");
+            await NavigationService.NavigateAsync("Navigation/Login");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<NavigationPage>();
+            containerRegistry.RegisterForNavigation<NavigationPage>("Navigation");
             containerRegistry.RegisterForNavigation<MainPage>();
             containerRegistry.RegisterForNavigation<Login>();
+            containerRegistry.RegisterForNavigation<MenuPage>();
         }
     }
 }

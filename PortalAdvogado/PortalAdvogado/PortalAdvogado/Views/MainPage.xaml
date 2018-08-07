@@ -4,8 +4,58 @@
              x:Class="PortalAdvogado.Views.MainPage"
              Title="{Binding Title}">
 
-    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-        <Label Text="Welcome to Xamarin Forms and Prism!" />
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Sair" Command="{Binding LogoutCommand}" />
+    </ContentPage.ToolbarItems>
+    <StackLayout>
+        <Frame Padding="5" BackgroundColor="LightGray" HasShadow="True" HorizontalOptions="FillAndExpand">
+            <SearchBar 
+                    x:Name="ProcessoSearchBar" 
+                    SearchButtonPressed="SearchBar_OnSearchButtonPressed" 
+                    BackgroundColor="White"
+                    Placeholder="Nº Único ou Nº Processo Origem"/>
+        </Frame>
+        <ListView x:Name="ProcessosListView" Margin="10" IsVisible="false" SeparatorVisibility="None" HasUnevenRows="true" ItemsSource="{Binding processos}" IsEnabled="false">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid WidthRequest="10000" ColumnSpacing="0" RowSpacing="0" HorizontalOptions="FillAndExpand">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Nº Processo Origem: " Grid.Column="0" Grid.Row="0" FontSize="Medium" TextColor="DarkGreen"></Label>
+                            <Label Text="{Binding numeroProcessoTJSE}" Grid.Column="1" Grid.Row="0" FontSize="Medium" TextColor="DarkGreen"/>
+                            <Label Text="Nº Único: " Grid.Column="0" Grid.Row="1" FontSize="Small"></Label>
+                            <Label Text="{Binding numeroUnico}" Grid.Column="1" Grid.Row="1" FontSize="Small"/>
+                            <Label Text="Data da Distribuição: " Grid.Column="0" Grid.Row="2" FontSize="Small"></Label>
+                            <Label Text="{Binding dataDistribuicao}" Grid.Column="1" Grid.Row="2" FontSize="Small"/>
+                            <Label Text="Autor: " Grid.Column="0" Grid.Row="3" FontSize="Small"></Label>
+                            <Label Text="{Binding autor}" Grid.Column="1" Grid.Row="3" FontSize="Small"/>
+                            <Label Text="Réu: " Grid.Column="0" Grid.Row="4" FontSize="Small"></Label>
+                            <Label Text="{Binding reu}" Grid.Column="1" Grid.Row="4" FontSize="Small"/>
+                            <Label Text="Assunto: " Grid.Column="0" Grid.Row="5" FontSize="Small"></Label>
+                            <Label Text="{Binding assunto}" Grid.Column="1" Grid.Row="5" FontSize="Small"/>
+                            <Label Text="Localização: " Grid.Column="0" Grid.Row="6" FontSize="Small"></Label>
+                            <Label Text="{Binding localizacao}" Grid.Column="1" Grid.Row="6" FontSize="Small"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackLayout Margin="10" HorizontalOptions="FillAndExpand">
+            <Button x:Name="PartesBtn" Text="Partes e Advogados" HorizontalOptions="FillAndExpand" Clicked="OnPartesClicked" IsVisible="false"/>
+            <Button x:Name="MovimentosBtn" Text="Movimentos" HorizontalOptions="FillAndExpand" Clicked="OnMovimentosClicked" IsVisible="false"/>
+            <Button x:Name="DocumentosBtn" Text="Documentos" HorizontalOptions="FillAndExpand" Clicked="OnDocumentosClicked" IsVisible="false"/>
+        </StackLayout>
+        <StackLayout Margin="40" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+            <Label x:Name="EmptyListLabel"
+                    Text="Digite o número único CNJ do processo ou o número do processo no TJSE."
+                    IsVisible="true"/>
+        </StackLayout>
     </StackLayout>
 
 </ContentPage>

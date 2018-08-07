@@ -70,7 +70,7 @@ namespace PortalAdvogado.ViewModels
                         var respString = resposta.Content.ReadAsStringAsync().Result;
                         var param = new NavigationParameters();
                         param.Add("NomeAdvogado", respString);
-                        await NavigationService.NavigateAsync("NavigationPage/MainPage", param);
+                        await NavigationService.NavigateAsync("/MenuPage/Navigation/MainPage", param);
                     }
                     else
                     {
