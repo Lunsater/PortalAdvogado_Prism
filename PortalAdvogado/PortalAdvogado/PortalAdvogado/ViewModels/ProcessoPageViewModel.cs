@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using PortalAdvogado.Models;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using Prism.Services;
@@ -9,59 +10,118 @@ using System.Linq;
 namespace PortalAdvogado.ViewModels
 {
     public class ProcessoPageViewModel : ViewModelBase
-	{
-        private String _numProcesso;
+	{        
+        private string _numProcesso;
 
-        public String NumProcesso
+        public string NumProcesso
         {
             get { return _numProcesso; }
             set { SetProperty(ref _numProcesso, value); }
         }
 
-        private String _numeroUnico;
+        private string _numeroUnico;
 
-        public String NumeroUnico
+        public string NumeroUnico
         {
             get { return _numeroUnico; }
             set { SetProperty(ref _numeroUnico, value); }
         }
 
-        private String _dataDistribuicao;
+        private string _dataDistribuicao;
 
-        public String DataDistribuicao
+        public string DataDistribuicao
         {
             get { return _dataDistribuicao; }
             set { SetProperty(ref _dataDistribuicao, value); }
         }
 
-        private String _autor;
+        private string _competencia;
 
-        public String Autor
+        public string Competencia
         {
-            get { return _autor; }
-            set { SetProperty(ref _autor, value); }
+            get { return _competencia; }
+            set { SetProperty(ref _competencia, value); }
         }
 
-        private String _reu;
+        private string _ultimaFase;
 
-        public String Reu
+        public string UltimaFase
         {
-            get { return _reu; }
-            set { SetProperty(ref _reu, value); }
+            get { return _ultimaFase; }
+            set { SetProperty(ref _ultimaFase, value); }
         }
 
-        private String _assunto;
+        private string _assunto;
 
-        public String Assunto
+        public string Assunto
         {
             get { return _assunto; }
             set { SetProperty(ref _assunto, value); }
         }
 
+        private int _qtdFases;
+
+        public int QtdFases
+        {
+            get { return _qtdFases; }
+            set { SetProperty(ref _qtdFases, value); }
+        }
+
+        private int _qtdMovimentos;
+
+        public int QtdMovimentos
+        {
+            get { return _qtdMovimentos; }
+            set { SetProperty(ref _qtdMovimentos, value); }
+        }
+
+        private int _qtdDecisoes;
+
+        public int QtdDecisoes
+        {
+            get { return _qtdDecisoes; }
+            set { SetProperty(ref _qtdDecisoes, value); }
+        }
+
+        private int _qtdPartes;
+
+        public int QtdPartes
+        {
+            get { return _qtdPartes; }
+            set { SetProperty(ref _qtdPartes, value); }
+        }
+
+        public ProcessoResponse ProcResponse { get; set; }
+
+
         public ProcessoPageViewModel(INavigationService navigationService, IPageDialogService dialogService)
             : base(navigationService, dialogService)
         {
             Title = "Detalhes do processo";
+        }
+
+        public override void OnNavigatedTo(NavigationParameters parameters)
+        {
+            if (parameters.ContainsKey("ProcessoResponse"))
+            {
+                ProcResponse = parameters.GetValue<ProcessoResponse>("ProcessoResponse");
+                CarregaProcesso(ProcResponse);
+            }
+                
+        }
+
+        private void CarregaProcesso(ProcessoResponse procResponse)
+        {
+            NumProcesso = procResponse.numProcesso;
+            NumeroUnico = procResponse.numUnico;
+            DataDistribuicao = procResponse.dataDistribuicao.ToString("dd/MM/yyyy");
+            Assunto = procResponse.assunto;
+            Competencia = procResponse.competencia;
+            UltimaFase = procResponse.ultimaFase;
+            QtdMovimentos = procResponse.qtdMovimento;
+            QtdFases = procResponse.qtdFases;
+            QtdDecisoes = procResponse.qtdDecisoes;
+            QtdPartes = procResponse.qtdPartes;
         }
     }
 }

@@ -4,9 +4,6 @@
              x:Class="PortalAdvogado.Views.MainPage"
              Title="{Binding Title}">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Sair" Command="{Binding LogoutCommand}" />
-    </ContentPage.ToolbarItems>
     <StackLayout>
         <Frame Padding="5" BackgroundColor="LightGray" HasShadow="True" HorizontalOptions="FillAndExpand">
             <SearchBar 

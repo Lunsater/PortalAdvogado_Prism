@@ -7,6 +7,7 @@ namespace PortalAdvogado.Views
         public ProcessoPage()
         {
             InitializeComponent();
+            Title = "Detalhe do processo";
         }
     }
 }

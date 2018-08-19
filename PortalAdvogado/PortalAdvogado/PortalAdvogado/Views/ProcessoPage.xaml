@@ -6,6 +6,30 @@
              x:Class="PortalAdvogado.Views.ProcessoPage">
 
     <StackLayout>
+        <Frame Padding="5" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand">
+            <Label Text="{Binding NumProcesso, StringFormat='Processo nº {0}'}" FontSize="Medium" TextColor="DarkGreen"/>
+        </Frame>
+        <Frame BackgroundColor="LightGray" HorizontalOptions="FillAndExpand">
+            <Grid WidthRequest="10000" ColumnSpacing="0" RowSpacing="0" HorizontalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="Nº Único: " Grid.Column="0" Grid.Row="0" FontSize="Small" FontAttributes="Bold"></Label>
+                <Label Text="{Binding NumeroUnico}" Grid.Column="1" Grid.Row="0" FontSize="Small"/>
+                <Label Text="Data da Distribuição: " Grid.Column="0" Grid.Row="1" FontSize="Small" FontAttributes="Bold"></Label>
+                <Label Text="{Binding DataDistribuicao}" Grid.Column="1" Grid.Row="1" FontSize="Small"/>
+                <Label Text="Assunto: " Grid.Column="0" Grid.Row="2" FontSize="Small" FontAttributes="Bold"></Label>
+                <Label Text="{Binding Assunto}" Grid.Column="1" Grid.Row="2" FontSize="Small"/>
+                <Label Text="Competência: " Grid.Column="0" Grid.Row="3" FontSize="Small" FontAttributes="Bold"></Label>
+                <Label Text="{Binding Competencia}" Grid.Column="1" Grid.Row="3" FontSize="Small"/>
+                <Label Text="Última fase: " Grid.Column="0" Grid.Row="4" FontSize="Small" FontAttributes="Bold"></Label>
+                <Label Text="{Binding UltimaFase}" Grid.Column="1" Grid.Row="4" FontSize="Small"/>
+            </Grid>
+        </Frame>
         <ListView x:Name="ProcessosListView" Margin="10" IsVisible="false" SeparatorVisibility="None" HasUnevenRows="true" ItemsSource="{Binding processos}" IsEnabled="false">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -18,35 +42,19 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Label Text="Nº Processo Origem: " Grid.Column="0" Grid.Row="0" FontSize="Medium" TextColor="DarkGreen"></Label>
-                            <Label Text="{Binding numProcesso}" Grid.Column="1" Grid.Row="0" FontSize="Medium" TextColor="DarkGreen"/>
-                            <Label Text="Nº Único: " Grid.Column="0" Grid.Row="1" FontSize="Small"></Label>
-                            <Label Text="{Binding numeroUnico}" Grid.Column="1" Grid.Row="1" FontSize="Small"/>
-                            <Label Text="Data da Distribuição: " Grid.Column="0" Grid.Row="2" FontSize="Small"></Label>
-                            <Label Text="{Binding dataDistribuicao}" Grid.Column="1" Grid.Row="2" FontSize="Small"/>
-                            <Label Text="Autor: " Grid.Column="0" Grid.Row="3" FontSize="Small"></Label>
-                            <Label Text="{Binding autor}" Grid.Column="1" Grid.Row="3" FontSize="Small"/>
-                            <Label Text="Réu: " Grid.Column="0" Grid.Row="4" FontSize="Small"></Label>
-                            <Label Text="{Binding reu}" Grid.Column="1" Grid.Row="4" FontSize="Small"/>
-                            <Label Text="Assunto: " Grid.Column="0" Grid.Row="5" FontSize="Small"></Label>
-                            <Label Text="{Binding assunto}" Grid.Column="1" Grid.Row="5" FontSize="Small"/>
-                            <Label Text="Localização: " Grid.Column="0" Grid.Row="6" FontSize="Small"></Label>
-                            <Label Text="{Binding localizacao}" Grid.Column="1" Grid.Row="6" FontSize="Small"/>
+                            <Label Text="Fases" Grid.Column="0" Grid.Row="0" FontSize="Small" FontAttributes="Bold"></Label>
+                            <Label Text="{Binding QtdFases}" Grid.Column="1" Grid.Row="0" FontSize="Small"/>
+                            <Label Text="Movimentos" Grid.Column="0" Grid.Row="2" FontSize="Small" FontAttributes="Bold"></Label>
+                            <Label Text="{Binding QtdMovimentos}" Grid.Column="1" Grid.Row="2" FontSize="Small"/>
+                            <Label Text="Decisões" Grid.Column="0" Grid.Row="3" FontSize="Small" FontAttributes="Bold"></Label>
+                            <Label Text="{Binding QtdDecisoes}" Grid.Column="1" Grid.Row="3" FontSize="Small"/>
+                            <Label Text="Partes e Advogados" Grid.Column="0" Grid.Row="4" FontSize="Small" FontAttributes="Bold"></Label>
+                            <Label Text="{Binding QtdPartes}" Grid.Column="1" Grid.Row="4" FontSize="Small"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <StackLayout Margin="10" HorizontalOptions="FillAndExpand">
-            <Button x:Name="PartesBtn" Text="Partes e Advogados" HorizontalOptions="FillAndExpand" Clicked="OnPartesClicked" IsVisible="false"/>
-            <Button x:Name="MovimentosBtn" Text="Movimentos" HorizontalOptions="FillAndExpand" Clicked="OnMovimentosClicked" IsVisible="false"/>
-            <Button x:Name="DocumentosBtn" Text="Documentos" HorizontalOptions="FillAndExpand" Clicked="OnDocumentosClicked" IsVisible="false"/>
-        </StackLayout>
-        <StackLayout Margin="40" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-            <Label x:Name="EmptyListLabel"
-                    Text="Digite o número único CNJ do processo ou o número do processo no TJSE."
-                    IsVisible="true"/>
-        </StackLayout>
     </StackLayout>
 
 </ContentPage>

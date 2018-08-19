@@ -10,6 +10,8 @@
             <StackLayout Padding="20">
                 <!-- TODO: // Update the Layout and add some real menu items  -->
                 <Button Text="ViewA" Command="{Binding NavigateCommand}" CommandParameter="ViewA" />
+                <BoxView Color="Gray"  HeightRequest="1" HorizontalOptions="Fill"></BoxView>
+                <Button Text="Sair" Command="{Binding LogoutCommand}" />
             </StackLayout>
         </ContentPage>
     </MasterDetailPage.Master>

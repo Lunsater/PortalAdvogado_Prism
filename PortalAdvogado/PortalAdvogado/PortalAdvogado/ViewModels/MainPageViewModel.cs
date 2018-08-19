@@ -1,10 +1,14 @@
-﻿using Prism.Commands;
+﻿using Acr.UserDialogs;
+using Newtonsoft.Json;
+using PortalAdvogado.Models;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using Prism.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 
 namespace PortalAdvogado.ViewModels
@@ -29,11 +33,33 @@ namespace PortalAdvogado.ViewModels
 
         private async void SearchAction()
         {
-            var param = new NavigationParameters();
-            param.Add("NomeAdvogado", NumeroProcesso);
-            await NavigationService.NavigateAsync("/MenuPage/Navigation/ProcessoPage", param);
+            try
+            {
+                using (var cliente = IniciarClient())
+                {
+                    UserDialogs.Instance.ShowLoading("Carregando...");
+                    var resposta = await cliente.GetStringAsync("/tjse-mobile-rest-services/processo/buscar/" + NumeroProcesso);
+                    var processoResponse = JsonConvert.DeserializeObject<ProcessoResponse>(resposta);
+                    if (processoResponse != null)
+                    {
+                        var param = new NavigationParameters();
+                        param.Add("ProcessoResponse", processoResponse);
+                        await NavigationService.NavigateAsync("/MenuPage/Navigation/ProcessoPage", param);
+                    }
+                    else
+                    {
+                        await DialogService.DisplayAlertAsync("Resultado", "Nenhum processo encontrado!", "Ok");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                UserDialogs.Instance.HideLoading();
+            }
         }
-
-
     }
 }
