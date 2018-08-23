@@ -44,7 +44,7 @@ namespace PortalAdvogado.ViewModels
                     {
                         var param = new NavigationParameters();
                         param.Add("ProcessoResponse", processoResponse);
-                        await NavigationService.NavigateAsync("/MenuPage/Navigation/ProcessoPage", param);
+                        await NavigationService.NavigateAsync("ProcessoPage", param);
                     }
                     else
                     {

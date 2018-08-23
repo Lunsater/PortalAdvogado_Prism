@@ -17,13 +17,13 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Grid WidthRequest="10000" ColumnSpacing="0" RowSpacing="0" HorizontalOptions="FillAndExpand">
+                        <Grid HorizontalOptions="FillAndExpand">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <Label Text="Nº Processo Origem: " Grid.Column="0" Grid.Row="0" FontSize="Medium" TextColor="DarkGreen"></Label>
                             <Label Text="{Binding numeroProcessoTJSE}" Grid.Column="1" Grid.Row="0" FontSize="Medium" TextColor="DarkGreen"/>
