@@ -9,5 +9,10 @@ namespace PortalAdvogado.Views
             InitializeComponent();
             Title = "Detalhe do processo";
         }
+
+        private void ProcessosListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            ProcessosListView.SelectedItem = null;
+        }
     }
 }

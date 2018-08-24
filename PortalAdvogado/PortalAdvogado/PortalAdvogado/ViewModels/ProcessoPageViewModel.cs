@@ -5,6 +5,7 @@ using Prism.Navigation;
 using Prism.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace PortalAdvogado.ViewModels
@@ -93,11 +94,14 @@ namespace PortalAdvogado.ViewModels
 
         public ProcessoResponse ProcResponse { get; set; }
 
+        public ObservableCollection<ProcessoInfo> Processo { get; set; }
+
 
         public ProcessoPageViewModel(INavigationService navigationService, IPageDialogService dialogService)
             : base(navigationService, dialogService)
         {
             Title = "Detalhes do processo";
+            Processo = new ObservableCollection<ProcessoInfo>();
         }
 
         public override void OnNavigatedTo(NavigationParameters parameters)
@@ -118,10 +122,41 @@ namespace PortalAdvogado.ViewModels
             Assunto = procResponse.assunto;
             Competencia = procResponse.competencia;
             UltimaFase = procResponse.ultimaFase;
+
+            ProcessoInfo procInfo= new ProcessoInfo();
+            procInfo.Descricao = "Fases";
+            procInfo.Quantidade = procResponse.qtdFases;
+            Processo.Add(procInfo);
+
+            procInfo = new ProcessoInfo();
+            procInfo.Descricao = "Movimentos";
+            procInfo.Quantidade = procResponse.qtdMovimento;
+            Processo.Add(procInfo);
+
+            procInfo = new ProcessoInfo();
+            procInfo.Descricao = "Decisões";
+            procInfo.Quantidade = procResponse.qtdDecisoes;
+            Processo.Add(procInfo);
+
+            procInfo = new ProcessoInfo();
+            procInfo.Descricao = "Partes e Advogados";
+            procInfo.Quantidade = procResponse.qtdPartes;
+            Processo.Add(procInfo);
+
+            /*
             QtdMovimentos = procResponse.qtdMovimento;
             QtdFases = procResponse.qtdFases;
             QtdDecisoes = procResponse.qtdDecisoes;
             QtdPartes = procResponse.qtdPartes;
+
+            Processo.Add(procResponse);
+            */
         }
+    }
+
+    public class ProcessoInfo
+    {
+        public string Descricao { get; set; }
+        public int Quantidade { get; set; }
     }
 }

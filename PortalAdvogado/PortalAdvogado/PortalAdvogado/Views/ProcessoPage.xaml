@@ -9,7 +9,7 @@
         <Frame Padding="5" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand">
             <Label Text="{Binding NumProcesso, StringFormat='Processo nº {0}'}" FontSize="Medium" TextColor="DarkGreen"/>
         </Frame>
-        <Frame BackgroundColor="LightGray" HorizontalOptions="FillAndExpand">
+        <Frame BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" VerticalOptions="Fill">
             <Grid HorizontalOptions="FillAndExpand">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -30,20 +30,15 @@
                 <Label Text="{Binding UltimaFase}" Grid.Column="1" Grid.Row="4" FontSize="Small"/>
             </Grid>
         </Frame>
-        <ListView x:Name="ProcessosListView" Margin="10" SeparatorVisibility="None" HasUnevenRows="true" ItemsSource="{Binding processos}" >
+        <ListView x:Name="ProcessosListView" Margin="10" SeparatorVisibility="None" HasUnevenRows="true" ItemsSource="{Binding Processo}" 
+                  ItemSelected="ProcessosListView_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.View>
                             <StackLayout Orientation="Horizontal">
-                                <Label Text="Fases" FontSize="Medium" FontAttributes="Bold"></Label>
-                                <Label Text="{Binding QtdFases}" FontSize="Small" />
-                                <Label Text="Movimentos" FontSize="Medium" FontAttributes="Bold"></Label>
-                                <Label Text="{Binding QtdMovimentos}" FontSize="Small"/>
-                                <Label Text="Decisões" FontSize="Medium" FontAttributes="Bold"></Label>
-                                <Label Text="{Binding QtdDecisoes}" FontSize="Small"/>
-                                <Label Text="Partes e Advogados" FontSize="Medium" FontAttributes="Bold"></Label>
-                                <Label Text="{Binding QtdPartes}" FontSize="Small"/>
+                                <Label Text="{Binding Descricao}" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="FillAndExpand"></Label>
+                                <Label Text="{Binding Quantidade, StringFormat='{0} >'}" FontSize="Small" />
                             </StackLayout>
                         </ViewCell.View>
                     </ViewCell>
