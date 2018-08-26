@@ -5,13 +5,13 @@
              Title="{Binding Title}">
 
     <StackLayout>
-        <Frame Padding="5" BackgroundColor="LightGray" HasShadow="True" HorizontalOptions="FillAndExpand">
+        <Frame BackgroundColor="LightGray" HasShadow="True" HorizontalOptions="FillAndExpand">
             <SearchBar 
                     x:Name="ProcessoSearchBar" 
                     SearchCommand="{Binding SearchCommand}"
                     BackgroundColor="White"
                     Text="{Binding NumeroProcesso}"
-                    Placeholder="Nº Único ou Nº Processo Origem" />
+                    Placeholder="Nº Único ou Nº Processo Origem"/>
         </Frame>
         <StackLayout Margin="40" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
             <Label x:Name="EmptyListLabel"

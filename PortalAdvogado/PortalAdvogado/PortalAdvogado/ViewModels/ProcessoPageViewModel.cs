@@ -60,38 +60,6 @@ namespace PortalAdvogado.ViewModels
             set { SetProperty(ref _assunto, value); }
         }
 
-        private int _qtdFases;
-
-        public int QtdFases
-        {
-            get { return _qtdFases; }
-            set { SetProperty(ref _qtdFases, value); }
-        }
-
-        private int _qtdMovimentos;
-
-        public int QtdMovimentos
-        {
-            get { return _qtdMovimentos; }
-            set { SetProperty(ref _qtdMovimentos, value); }
-        }
-
-        private int _qtdDecisoes;
-
-        public int QtdDecisoes
-        {
-            get { return _qtdDecisoes; }
-            set { SetProperty(ref _qtdDecisoes, value); }
-        }
-
-        private int _qtdPartes;
-
-        public int QtdPartes
-        {
-            get { return _qtdPartes; }
-            set { SetProperty(ref _qtdPartes, value); }
-        }
-
         public ProcessoResponse ProcResponse { get; set; }
 
         public ObservableCollection<ProcessoInfo> Processo { get; set; }
@@ -142,15 +110,6 @@ namespace PortalAdvogado.ViewModels
             procInfo.Descricao = "Partes e Advogados";
             procInfo.Quantidade = procResponse.qtdPartes;
             Processo.Add(procInfo);
-
-            /*
-            QtdMovimentos = procResponse.qtdMovimento;
-            QtdFases = procResponse.qtdFases;
-            QtdDecisoes = procResponse.qtdDecisoes;
-            QtdPartes = procResponse.qtdPartes;
-
-            Processo.Add(procResponse);
-            */
         }
     }
 

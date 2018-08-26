@@ -6,39 +6,45 @@
              x:Class="PortalAdvogado.Views.ProcessoPage">
 
     <StackLayout>
-        <Frame Padding="5" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand">
-            <Label Text="{Binding NumProcesso, StringFormat='Processo nº {0}'}" FontSize="Medium" TextColor="DarkGreen"/>
+        <Frame Margin="0" Padding="1" BackgroundColor="LightGray" OutlineColor="Black" HorizontalOptions="FillAndExpand">
+            <Label Text="{Binding NumProcesso, StringFormat='Processo nº {0}'}" FontSize="Large" TextColor="DarkGreen"/>
         </Frame>
-        <Frame BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" VerticalOptions="Fill">
+        <Frame Margin="0" Padding="1" BackgroundColor="LightGray" OutlineColor="Black" HorizontalOptions="FillAndExpand">
             <Grid HorizontalOptions="FillAndExpand">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <Label Text="Nº Único: " Grid.Column="0" Grid.Row="0" FontSize="Small" FontAttributes="Bold"></Label>
-                <Label Text="{Binding NumeroUnico}" Grid.Column="1" Grid.Row="0" FontSize="Small"/>
-                <Label Text="Data da Distribuição: " Grid.Column="0" Grid.Row="1" FontSize="Small" FontAttributes="Bold"></Label>
-                <Label Text="{Binding DataDistribuicao}" Grid.Column="1" Grid.Row="1" FontSize="Small"/>
-                <Label Text="Assunto: " Grid.Column="0" Grid.Row="2" FontSize="Small" FontAttributes="Bold"></Label>
-                <Label Text="{Binding Assunto}" Grid.Column="1" Grid.Row="2" FontSize="Small"/>
-                <Label Text="Competência: " Grid.Column="0" Grid.Row="3" FontSize="Small" FontAttributes="Bold"></Label>
-                <Label Text="{Binding Competencia}" Grid.Column="1" Grid.Row="3" FontSize="Small"/>
-                <Label Text="Última fase: " Grid.Column="0" Grid.Row="4" FontSize="Small" FontAttributes="Bold"></Label>
-                <Label Text="{Binding UltimaFase}" Grid.Column="1" Grid.Row="4" FontSize="Small"/>
+                <Label Text="Nº Único: " Grid.Column="0" Grid.Row="0" FontSize="Small" FontAttributes="Bold" TextColor="Black"></Label>
+                <Label Text="{Binding NumeroUnico}" Grid.Column="1" Grid.Row="0" FontSize="Small" TextColor="Black"/>
+                <Label Text="Data da Distribuição: " Grid.Column="0" Grid.Row="1" FontSize="Small" FontAttributes="Bold" TextColor="Black"></Label>
+                <Label Text="{Binding DataDistribuicao}" Grid.Column="1" Grid.Row="1" FontSize="Small" TextColor="Black"/>
+                <Label Text="Assunto: " Grid.Column="0" Grid.Row="2" FontSize="Small" FontAttributes="Bold" TextColor="Black"></Label>
+                <Label Text="{Binding Assunto}" Grid.Column="1" Grid.Row="2" FontSize="Small" TextColor="Black"/>
+                <Label Text="Competência: " Grid.Column="0" Grid.Row="3" FontSize="Small" FontAttributes="Bold" TextColor="Black"></Label>
+                <Label Text="{Binding Competencia}" Grid.Column="1" Grid.Row="3" FontSize="Small" TextColor="Black"/>
+                <Label Text="Última fase: " Grid.Column="0" Grid.Row="4" FontSize="Small" FontAttributes="Bold" TextColor="Black"></Label>
+                <Label Text="{Binding UltimaFase}" Grid.Column="1" Grid.Row="4" FontSize="Small" TextColor="Black"/>
             </Grid>
         </Frame>
-        <ListView x:Name="ProcessosListView" Margin="10" SeparatorVisibility="None" HasUnevenRows="true" ItemsSource="{Binding Processo}" 
+        <ListView x:Name="ProcessosListView" Margin="10" ItemsSource="{Binding Processo}" RowHeight="50"
                   ItemSelected="ProcessosListView_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.View>
                             <StackLayout Orientation="Horizontal">
-                                <Label Text="{Binding Descricao}" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="FillAndExpand"></Label>
-                                <Label Text="{Binding Quantidade, StringFormat='{0} >'}" FontSize="Small" />
+                                <Label Text="{Binding Descricao}" FontSize="Large" FontAttributes="Bold" 
+                                       HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" TextColor="Black"></Label>
+                                <Label Text="{Binding Quantidade, StringFormat='{0} >'}" FontSize="Medium" TextColor="Black"
+                                        VerticalTextAlignment="Center"/>
                             </StackLayout>
                         </ViewCell.View>
                     </ViewCell>
