@@ -53,6 +53,7 @@ namespace PortalAdvogado.ViewModels
             {
                 //Timeout = TimeSpan.FromSeconds(10),
                 BaseAddress = new Uri("http://homologacao.tjse.jus.br:8080")
+                //BaseAddress = new Uri("http://192.168.1.21:5000")
             };
             return cliente;
         }

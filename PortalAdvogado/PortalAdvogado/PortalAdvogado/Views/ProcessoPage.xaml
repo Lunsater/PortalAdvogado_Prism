@@ -34,8 +34,8 @@
                 <Label Text="{Binding UltimaFase}" Grid.Column="1" Grid.Row="4" FontSize="Small" TextColor="Black"/>
             </Grid>
         </Frame>
-        <ListView x:Name="ProcessosListView" Margin="10" ItemsSource="{Binding Processo}" RowHeight="50"
-                  ItemSelected="ProcessosListView_ItemSelected">
+        <ListView x:Name="ProcessosListView" Margin="10" ItemsSource="{Binding Processos}" RowHeight="50"
+                  ItemSelected="ProcessosListView_ItemSelected" SelectedItem="{Binding ItemProcSelecionado}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

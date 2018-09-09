@@ -1,4 +1,6 @@
-﻿using PortalAdvogado.Models;
+﻿using Acr.UserDialogs;
+using Newtonsoft.Json;
+using PortalAdvogado.Models;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -62,14 +64,27 @@ namespace PortalAdvogado.ViewModels
 
         public ProcessoResponse ProcResponse { get; set; }
 
-        public ObservableCollection<ProcessoInfo> Processo { get; set; }
+        public ObservableCollection<ProcessoInfo> Processos { get; set; }
 
+        private ProcessoInfo _itemProcSelecionado;
+        public ProcessoInfo ItemProcSelecionado
+        {
+            get { return _itemProcSelecionado; }
+            set
+            {
+                _itemProcSelecionado = value;
+                if (value != null)
+                {
+                    ItemProcSelecionadoAction(_itemProcSelecionado);
+                }
+            }
+        }
 
         public ProcessoPageViewModel(INavigationService navigationService, IPageDialogService dialogService)
             : base(navigationService, dialogService)
         {
             Title = "Detalhes do processo";
-            Processo = new ObservableCollection<ProcessoInfo>();
+            Processos = new ObservableCollection<ProcessoInfo>();
         }
 
         public override void OnNavigatedTo(NavigationParameters parameters)
@@ -92,30 +107,74 @@ namespace PortalAdvogado.ViewModels
             UltimaFase = procResponse.ultimaFase;
 
             ProcessoInfo procInfo= new ProcessoInfo();
+            procInfo.NumProcesso = ProcResponse.numProcesso;
             procInfo.Descricao = "Fases";
             procInfo.Quantidade = procResponse.qtdFases;
-            Processo.Add(procInfo);
+            Processos.Add(procInfo);
 
             procInfo = new ProcessoInfo();
+            procInfo.NumProcesso = ProcResponse.numProcesso;
             procInfo.Descricao = "Movimentos";
             procInfo.Quantidade = procResponse.qtdMovimento;
-            Processo.Add(procInfo);
+            Processos.Add(procInfo);
 
             procInfo = new ProcessoInfo();
+            procInfo.NumProcesso = ProcResponse.numProcesso;
             procInfo.Descricao = "Decisões";
             procInfo.Quantidade = procResponse.qtdDecisoes;
-            Processo.Add(procInfo);
+            Processos.Add(procInfo);
 
             procInfo = new ProcessoInfo();
+            procInfo.NumProcesso = ProcResponse.numProcesso;
             procInfo.Descricao = "Partes e Advogados";
             procInfo.Quantidade = procResponse.qtdPartes;
-            Processo.Add(procInfo);
+            Processos.Add(procInfo);
         }
+
+        private async void ItemProcSelecionadoAction(ProcessoInfo itemProcSelecionado)
+        {
+            try
+            {
+                using (var cliente = IniciarClient())
+                {
+                    UserDialogs.Instance.ShowLoading("Carregando...");
+                    if ("Fases".Equals(itemProcSelecionado.Descricao))
+                    {
+                        if (itemProcSelecionado.Quantidade > 0)
+                        {
+                            var resposta = await cliente.GetStringAsync("/tjse-mobile-rest-services/fase/buscar/" 
+                                + itemProcSelecionado.NumProcesso);
+                            var faseResponse = JsonConvert.DeserializeObject<FaseResponse>(resposta);
+                            var param = new NavigationParameters();
+                            param.Add("FaseResponse", faseResponse);
+                            await NavigationService.NavigateAsync("FasesPage", param);
+                        }
+                        else
+                        {
+                            await DialogService.DisplayAlertAsync("Resultado", "Nenhuma fase encontrada!", "Ok");
+                        }
+                    }
+                    
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                UserDialogs.Instance.HideLoading();
+            }
+
+        }
+
     }
 
     public class ProcessoInfo
     {
+        public string NumProcesso { get; set; }
         public string Descricao { get; set; }
         public int Quantidade { get; set; }
     }
+
 }

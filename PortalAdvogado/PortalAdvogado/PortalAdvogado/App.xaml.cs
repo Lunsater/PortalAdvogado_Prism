@@ -34,6 +34,7 @@ namespace PortalAdvogado
             containerRegistry.RegisterForNavigation<Login>();
             containerRegistry.RegisterForNavigation<MenuPage>();
             containerRegistry.RegisterForNavigation<ProcessoPage>();
+            containerRegistry.RegisterForNavigation<FasesPage>();
         }
     }
 }

@@ -78,9 +78,9 @@ namespace PortalAdvogado.ViewModels
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
+                Console.WriteLine("IOException message: {0}", e.Message);
             }
             finally
             {
