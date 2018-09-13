@@ -64,7 +64,7 @@ namespace PortalAdvogado.ViewModels
                     var conteudoJson = JsonConvert.SerializeObject(new LoginAdvogado(Oab, Letra, Uf, Senha));
                     var conteudo = new StringContent(conteudoJson, Encoding.UTF8, "application/json");
 
-                    var resposta = await cliente.PostAsync("/tjse-mobile-rest-services/login/advogado", conteudo);
+                    var resposta = await cliente.PostAsync("/processo-api/login/advogado", conteudo);
                     if (resposta.IsSuccessStatusCode)
                     {
                         var respString = resposta.Content.ReadAsStringAsync().Result;

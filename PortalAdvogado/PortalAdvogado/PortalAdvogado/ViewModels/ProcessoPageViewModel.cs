@@ -142,7 +142,7 @@ namespace PortalAdvogado.ViewModels
                     {
                         if (itemProcSelecionado.Quantidade > 0)
                         {
-                            var resposta = await cliente.GetStringAsync("/tjse-mobile-rest-services/fase/buscar/" 
+                            var resposta = await cliente.GetStringAsync("/processo-api/fase/buscar/" 
                                 + itemProcSelecionado.NumProcesso);
                             var faseResponse = JsonConvert.DeserializeObject<FaseResponse>(resposta);
                             var param = new NavigationParameters();

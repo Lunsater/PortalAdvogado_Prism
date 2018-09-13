@@ -38,7 +38,7 @@ namespace PortalAdvogado.ViewModels
                 using (var cliente = IniciarClient())
                 {
                     UserDialogs.Instance.ShowLoading("Carregando...");
-                    var resposta = await cliente.GetStringAsync("/tjse-mobile-rest-services/processo/buscar/" + NumeroProcesso);
+                    var resposta = await cliente.GetStringAsync("/processo-api/processo/buscar/" + NumeroProcesso);
                     var processoResponse = JsonConvert.DeserializeObject<ProcessoResponse>(resposta);
                     if (processoResponse != null)
                     {
