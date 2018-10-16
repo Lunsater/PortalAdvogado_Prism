@@ -102,15 +102,11 @@ namespace PortalAdvogado.ViewModels
             NumProcesso = procResponse.numProcesso;
             NumeroUnico = procResponse.numUnico;
             DataDistribuicao = procResponse.dataDistribuicao.ToString("dd/MM/yyyy");
-            Assunto = procResponse.assunto;
+            Assunto = procResponse.assuntoPrincipal;
             Competencia = procResponse.competencia;
             UltimaFase = procResponse.ultimaFase;
 
             ProcessoInfo procInfo= new ProcessoInfo();
-            procInfo.NumProcesso = ProcResponse.numProcesso;
-            procInfo.Descricao = "Fases";
-            procInfo.Quantidade = procResponse.qtdFases;
-            Processos.Add(procInfo);
 
             procInfo = new ProcessoInfo();
             procInfo.NumProcesso = ProcResponse.numProcesso;
@@ -142,7 +138,7 @@ namespace PortalAdvogado.ViewModels
                     {
                         if (itemProcSelecionado.Quantidade > 0)
                         {
-                            var resposta = await cliente.GetStringAsync("/processo-api/fase/buscar/" 
+                            var resposta = await cliente.GetStringAsync("/processo-api/v1/fase/" 
                                 + itemProcSelecionado.NumProcesso);
                             var faseResponse = JsonConvert.DeserializeObject<FaseResponse>(resposta);
                             var param = new NavigationParameters();
